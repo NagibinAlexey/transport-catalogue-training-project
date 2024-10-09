@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "map_renderer.proto";
+import "transport_router.proto";
+import "graph.proto";
+
+package trans_catalogue_serialize;
+
+message Coordinates {
+    double lat = 1;
+    double lng = 2;
+}
+
+message Stop {
+    bytes name = 1;
+    Coordinates coordinates = 2;
+    uint32 id = 3;
+}
+
+message StopDistances {
+    uint32 first_id = 1;
+    uint32 second_id = 2;
+    double distance = 3;
+}
+
+message BusStat {
+    uint32 stops_count = 1;
+    uint32 unique_stops_count = 2;
+	double route_distance = 3;
+	double route_length = 4;
+}
+
+message Bus {
+    bytes name = 1;
+    repeated uint32 stops_by_id = 2;
+    bool is_circle_route = 3;
+	BusStat stat = 4;
+}
+
+message TransportCatalogue {
+    repeated Stop stop = 1;
+    repeated StopDistances distance = 2;
+    repeated Bus route = 3;
+    render_settings_serialize.RenderSettings render_settings = 4;
+    router_serialize.RoutingSettings routing_settings = 5;
+    graph_serialize.Graph graph = 6;
+    router_serialize.Router router = 7;
+}

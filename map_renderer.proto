@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "svg.proto";
+
+package render_settings_serialize;
+
+message Size {
+    double width = 1;
+    double height = 2;
+}
+
+message BusLabelOffset {
+    double dx = 1;
+    double dy = 2;
+}
+
+message StopLabelOffset {
+    double dx = 1;
+    double dy = 2;
+}
+
+message RenderSettings {
+    Size size = 1;
+    double padding = 2;
+    double line_width = 3;
+	double stop_radius = 4;
+    uint32 bus_label_font_size = 5;
+    BusLabelOffset bus_label_offset = 6;
+    uint32 stop_label_font_size = 7;
+    StopLabelOffset stop_label_offset = 8;
+    svg_serialize.Color underlayer_color = 9;
+    double underlayer_width = 10;
+    repeated svg_serialize.Color color_palette = 11;
+}
